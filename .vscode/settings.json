@@ -1,8 +1,11 @@
 {
     "[python]": {
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "ms-python.vscode-pylance"
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "always",
+        },
     },
-    "python.analysis.typeCheckingMode": "strict",
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": false,
 }

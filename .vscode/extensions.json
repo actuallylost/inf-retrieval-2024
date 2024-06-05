@@ -1,7 +1,7 @@
 {
     "recommendations": [
         "ms-python.isort",
-        "ms-python.python",
+        "ms-python.black-formatter",
         "magicstack.magicpython",
         "njqdev.vscode-python-typehint",
         "kevinrose.vsc-python-indent",
