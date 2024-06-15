@@ -61,7 +61,20 @@ class Document:
             v = M_hat @ w + (1 - d)
         return v
 
-    def read_file(self, file):
+    def read_file(self, file) -> list[str]:
+        """
+        Reads an HTML or TXT File.
+
+        Parameters
+        ----------
+        file: file-like object
+            File to read.
+
+        Returns
+        -------
+        list[srt]
+            a list of the file's lines that have been preprocessed using TextPreprocess class.
+        """
         tp = TextPreprocess()
         if file.type.split("/")[-1].lower() == "html":
             data_frames = pd.read_html(file)
