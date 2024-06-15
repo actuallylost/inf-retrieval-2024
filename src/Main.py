@@ -15,13 +15,28 @@ def main():
 
     if uploaded_files is not None:
 
-        tokens = {}
+        file_tokens = {}
 
-        for i in range(len(uploaded_files)):
+        for i, uploaded_file in enumerate(uploaded_files):
             dc = Document()
+            tokens = Document.tokenize(dc, uploaded_file)
+            file_tokens[uploaded_file.name] = tokens
 
-            tokens = Document.tokenize(dc, file=uploaded_files[i])
-            st.write(tokens)
+        search_query = st.text_input("Search your files ...")
+        if search_query:
+            query_tokens = Document.tokenize(Document(), search_query)
+            matching_files = {}
+
+            for file_name, tokens in file_tokens.items():
+                if any(query_token in tokens for query_token in query_tokens):
+                    matching_files[file_name] = tokens
+
+            if matching_files:
+                st.write("Matching files: ")
+                for file_name in matching_files:
+                    st.write(file_name)
+            else:
+                st.write("No matches found :(")
 
 
 if __name__ == "__main__":
