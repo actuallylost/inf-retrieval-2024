@@ -21,7 +21,7 @@
     $ source <ROOT_OF_PROJECT>/.venv/bin/activate
     ```
 
-    ```ps
+    ```bash
     # Windows PowerShell
     PS <ROOT_OF_PROJECT>\.venv\Scripts\activate.ps1
     ```
