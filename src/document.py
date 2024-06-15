@@ -15,12 +15,15 @@ class Document:
         self.file = ""
         self.tokens: dict[str, int] = {}
 
-    def tokenize(self, file) -> dict[str, int]:
+    def tokenize(self, input_data) -> dict[str, int]:
         """
         Takes a file and turns each word of the file into a token and pushes it into the tokens dictionary.
         """
-        data_file = str(self.read_file(file))
-        words = re.findall(r"\b\w+\b", data_file.lower())
+        if isinstance(input_data, str):
+            data = input_data
+        else:
+            data = str(self.read_file(input_data))
+        words = re.findall(r"\b\w+\b", data.lower())
         for token in words:
             p_token = str(token).strip().lower()
             if p_token in self.tokens:
