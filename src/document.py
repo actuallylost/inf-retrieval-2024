@@ -18,6 +18,16 @@ class Document:
     def tokenize(self, input_data) -> dict[str, int]:
         """
         Takes a file and turns each word of the file into a token and pushes it into the tokens dictionary.
+
+        Parameters
+        ----------
+        input_data: str | file-like object
+            Data to tokenize.
+
+        Returns
+        -------
+        dict[str, int]
+            Returns a dictionary with each token and its corresponding counter.
         """
         if isinstance(input_data, str):
             data = input_data
