@@ -1,4 +1,4 @@
-# Information Retrival 2024
+# Information Retrieval 2024
 
 ## Running the application
 
