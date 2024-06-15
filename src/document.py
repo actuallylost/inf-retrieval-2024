@@ -11,7 +11,7 @@ class Document:
     This class represents a document that is instantiated with a list of files and a dictionary of tokens.
     """
 
-    def __init__(self, file, tokens) -> None:
+    def __init__(self) -> None:
         self.file = ""
         self.tokens: dict[str, int] = {}
 

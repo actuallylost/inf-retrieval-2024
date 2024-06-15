@@ -18,7 +18,7 @@ def main():
         tokens = {}
 
         for i in range(len(uploaded_files)):
-            dc = Document(uploaded_files[i], tokens=tokens)
+            dc = Document()
 
             tokens = Document.tokenize(dc, file=uploaded_files[i])
             st.write(tokens)
