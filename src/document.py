@@ -1,4 +1,9 @@
+import re
+
 import numpy as np
+import pandas as pd
+
+from text_preprocess import TextPreprocess
 
 
 class Document:
@@ -14,16 +19,17 @@ class Document:
         """
         Takes a file and turns each word of the file into a token and pushes it into the tokens dictionary.
         """
-        with open(file, "r") as f:
-            for line in f:
-                for token in line.split():
-                    if token in self.tokens:
-                        self.tokens[token] += 1
-                    else:
-                        self.tokens[token] = 1
+        data_file = str(self.read_file(file))
+        words = re.findall(r"\b\w+\b", data_file.lower())
+        for token in words:
+            p_token = str(token).strip().lower()
+            if p_token in self.tokens:
+                self.tokens[p_token] += 1
+            else:
+                self.tokens[p_token] = 1
         return self.tokens
 
-    def rank(self, M, d: float = .85) -> None:
+    def rank(self, M, d: float = 0.85) -> None:
         """
         Implements the PageRank webpage ranking algorithm over an array of files or pages.
         More info: https://en.wikipedia.org/wiki/PageRank
@@ -47,7 +53,19 @@ class Document:
         w = np.ones(N) / N
         M_hat = d * M
         v = M_hat @ w + (1 - d)
-        while (np.linalg.norm(w - v) >= 1e-10):
+        while np.linalg.norm(w - v) >= 1e-10:
             w = v
             v = M_hat @ w + (1 - d)
         return v
+
+    def read_file(self, file):
+        tp = TextPreprocess()
+        if file.type.split("/")[-1].lower() == "html":
+            data_frames = pd.read_html(file)
+            data = data_frames[0]
+        else:
+            with open(file, "r", encoding="utf-8") as f:
+                data = f.read()
+            lines = data.split("\n")
+            headers = lines[0].split(",")
+            return TextPreprocess.text_preprocess(tp, text=data.headers[0])
