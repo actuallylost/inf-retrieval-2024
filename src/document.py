@@ -63,9 +63,8 @@ class Document:
         if file.type.split("/")[-1].lower() == "html":
             data_frames = pd.read_html(file)
             data = data_frames[0]
+            return TextPreprocess.text_preprocess(tp, text=data.frames[0])
+
         else:
-            with open(file, "r", encoding="utf-8") as f:
-                data = f.read()
-            lines = data.split("\n")
-            headers = lines[0].split(",")
-            return TextPreprocess.text_preprocess(tp, text=data.headers[0])
+            content = file.read().decode("utf-8")
+            return TextPreprocess.text_preprocess(tp, text=content)
