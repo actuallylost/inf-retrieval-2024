@@ -43,9 +43,6 @@ class Document:
                 self.tokens[p_token] = 1
         return self.tokens
 
-    def rank(self, files) -> None:
-        pass
-
     def read_file(self, file) -> list[str]:
         """
         Reads an HTML or TXT File.
