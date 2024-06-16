@@ -2,6 +2,7 @@ import re
 
 import numpy as np
 import pandas as pd
+from bs4 import BeautifulSoup as bfs
 
 from text_preprocess import TextPreprocess
 
@@ -87,9 +88,9 @@ class Document:
         """
         tp = TextPreprocess()
         if file.type.split("/")[-1].lower() == "html":
-            data_frames = pd.read_html(file)
-            data = data_frames[0]
-            return TextPreprocess.text_preprocess(tp, text=data.frames[0])
+            table = bfs(file).text
+            print(table)
+            return TextPreprocess.text_preprocess(tp, text=str(table))
 
         else:
             content = file.read().decode("utf-8")
