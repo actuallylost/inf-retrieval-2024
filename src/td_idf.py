@@ -3,7 +3,8 @@ import numpy as np
 
 class Rank:
     def term_frequency(self, word, file) -> float:
-        return np.log10(1 + file.count(word))
+        word_count = file.get(word, 0)
+        return np.log10(1 + word_count)
 
     def inverse_document_frequency(self, word, num_of_files) -> float:
         count_of_files = len(num_of_files) + 1
