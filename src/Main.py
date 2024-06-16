@@ -1,6 +1,7 @@
 import streamlit as st
 
 from document import Document
+from td_idf import Rank
 
 
 def main():
@@ -14,27 +15,36 @@ def main():
     )
 
     if uploaded_files is not None:
-
         file_tokens = {}
+        all_tokens = []
 
         for i, uploaded_file in enumerate(uploaded_files):
             dc = Document()
             tokens = Document.tokenize(dc, uploaded_file)
             file_tokens[uploaded_file.name] = tokens
+            all_tokens.extend(tokens)
 
         search_query = st.text_input("Search your files ...")
         if search_query:
+            ranker = Rank()
             query_tokens = Document.tokenize(Document(), search_query)
             matching_files = {}
 
             for file_name, tokens in file_tokens.items():
-                if any(query_token in tokens for query_token in query_tokens):
-                    matching_files[file_name] = tokens
+                total_score = 0
+                for query_token in query_tokens:
+                    if query_token in tokens:
+                        total_score += ranker.tf_idf(query_token, tokens, all_tokens)
+                matching_files[file_name] = total_score
 
-            if matching_files:
+            sorted_files = sorted(
+                matching_files.items(), key=lambda item: item[1], reverse=True
+            )
+
+            if sorted_files:
                 st.write("Matching files: ")
-                for file_name in matching_files:
-                    st.write(file_name)
+                for file_name, score in sorted_files:
+                    st.write(f"{file_name} (Score: {score})")
             else:
                 st.write("No matches found :(")
 
