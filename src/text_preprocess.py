@@ -12,7 +12,6 @@ class TextPreprocess:
     """
 
     def __init__(self):
-        nltk.download("stopwords")
         nltk.download("punkt")
 
     def convert_numbers_to_words(self, text: str):
@@ -61,26 +60,11 @@ class TextPreprocess:
         """
         return " ".join(text.split())
 
-    def remove_default_stopwords(self, text: str):
-        """
-        Remove default stopwords from given text.
-
-        Parameters
-        ----------
-        text : str
-                text to remove default stopwords from.
-        """
-        stop_words = set(stopwords.words("english"))
-        word_tokens = word_tokenize(text)
-        filtered_text = [word for word in word_tokens if word not in stop_words]
-        return " ".join(filtered_text)
-
     def text_preprocess(
         self,
         text: str,
     ):
         p_text = self.convert_numbers_to_words(text=text)
-        p_text = self.remove_default_stopwords(text=text)
         p_text = self.remove_punctuation(text=text)
         p_text = self.remove_whitespace(text=text)
         return p_text.split()
