@@ -1,7 +1,7 @@
 import streamlit as st
 
 from document import Document
-from td_idf import Rank
+from tf_idf import Rank
 
 
 def main():
