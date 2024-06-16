@@ -1,9 +1,7 @@
 import string
 
 import nltk
-from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from word2number import w2n
 
 
 class TextPreprocess:
@@ -13,28 +11,6 @@ class TextPreprocess:
 
     def __init__(self):
         nltk.download("punkt")
-
-    def convert_numbers_to_words(self, text: str):
-        """
-        Converts numbers to words (ex. 5 -> "five").
-
-        Parameters
-        ----------
-        text : str
-                text to check for numbers to convert.
-        """
-        temp_text: list[str] = text.split(sep=" ")
-        new_string = []
-
-        for i in range(len(temp_text)):
-            if temp_text[i].isdigit():
-                temp = w2n.word_to_num(temp_text[i])
-                new_string.append(temp)
-            else:
-                new_string.append(temp_text[i])
-
-        temp_text = new_string
-        return " ".join(temp_text)
 
     def remove_punctuation(self, text: str):
         """
@@ -64,7 +40,6 @@ class TextPreprocess:
         self,
         text: str,
     ):
-        p_text = self.convert_numbers_to_words(text=text)
         p_text = self.remove_punctuation(text=text)
         p_text = self.remove_whitespace(text=text)
         return p_text.split()
