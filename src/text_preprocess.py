@@ -15,11 +15,6 @@ class TextPreprocess:
     def remove_punctuation(self, text: str):
         """
         Removes punctuation from given text.
-
-        Parameters
-        ----------
-        text : str
-                text to remove punctuation from.
         """
         punctuation_to_remove = string.punctuation.replace(",", "")
         translator = str.maketrans("", "", punctuation_to_remove)
@@ -28,11 +23,6 @@ class TextPreprocess:
     def remove_whitespace(self, text: str):
         """
         Removes whitespace from given text.
-
-        Parameters
-        ----------
-        text : str
-                text to remove whitespace from.
         """
         return " ".join(text.split())
 
