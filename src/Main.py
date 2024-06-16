@@ -9,7 +9,7 @@ def main():
     st.title("Simple Search engine")
 
     uploaded_files = st.file_uploader(
-        "Upload simple TXT or HTML files",
+        "Upload one or multiple text or html files",
         type=["txt", "html"],
         accept_multiple_files=True,
     )
@@ -24,7 +24,7 @@ def main():
             file_tokens[uploaded_file.name] = tokens
             all_tokens.extend(tokens)
 
-        search_query = st.text_input("Search your files ...")
+        search_query = st.text_input("Search a term...")
         if search_query:
             ranker = Rank()
             query_tokens = Document.tokenize(Document(), search_query)
@@ -42,9 +42,9 @@ def main():
             )
 
             if sorted_files:
-                st.write("Matching files: ")
+                st.write("Your term appears in the following files: ")
                 for file_name, score in sorted_files:
-                    st.write(f"{file_name} (Score: {score})")
+                    st.write(f"{file_name} (Relevancy Score: {score})")
             else:
                 st.write("No matches found :(")
 
