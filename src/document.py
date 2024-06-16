@@ -82,7 +82,7 @@ class Document:
 
         Returns
         -------
-        list[srt]
+        list[str]
             a list of the file's lines that have been preprocessed using TextPreprocess class.
         """
         tp = TextPreprocess()
