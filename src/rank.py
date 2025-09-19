@@ -4,7 +4,8 @@ import numpy as np
 class Rank:
     """
     Represents the Rank class. \n
-    All algorithm implementations have been taken from - https://medium.com/@coldstart_coder/understanding-and-implementing-tf-idf-in-python-a325d1301484
+    All algorithm implementations have been taken from: \n
+    https://medium.com/@coldstart_coder/understanding-and-implementing-tf-idf-in-python-a325d1301484
     """
 
     def term_frequency(self, word, file) -> float:
